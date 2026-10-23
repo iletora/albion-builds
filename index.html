@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Albion Builds</title>
+<meta name="description" content="Build planner for Albion Online: compose builds, add notes, export PNG and save to a file.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="icons/slots/weapon.png">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Albion Builds</div>
+  <div class="toolbar">
+    <div class="group">
+      <button id="btnOpen" title="Open a saved .txt file">Open file</button>
+      <button id="btnSave" title="Save all builds to a .txt file">Save file</button>
+      <button id="btnShare" title="Copy a link to the current build set">Share link</button>
+    </div>
+    <div class="group">
+      <button id="btnUndo" class="icon" title="Undo (Ctrl+Z)">↶</button>
+      <button id="btnRedo" class="icon" title="Redo (Ctrl+Y)">↷</button>
+    </div>
+    <div class="group">
+      <a class="donate" href="https://dalink.to/toka_" target="_blank" rel="noopener">♥ Donate</a>
+    </div>
+  </div>
+  <input type="file" id="fileInput" accept=".txt,.json,text/plain,application/json" hidden>
+</header>
+
+<nav class="tabs" id="tabs"></nav>
+
+<main class="sheet">
+  <div class="sheet-head">
+    <input id="setTitle" class="set-title" placeholder="Build name, e.g. ZvZ kite clap" maxlength="80">
+    <textarea id="setDesc" class="set-desc" rows="1" placeholder="Description (shown on the image, Enter for a new line)"></textarea>
+    <div class="sheet-actions">
+      <button id="btnDupSet" class="ghost">Duplicate set</button>
+    </div>
+  </div>
+  <div class="colhead" id="colhead"></div>
+  <div id="rows" class="rows"></div>
+  <button id="btnAddRow" class="add-row">+ Add row</button>
+</main>
+
+<footer class="foot"><span>Autosaved in this browser. Use <b>Save file</b> to move builds to another computer.</span><span class="credit">Made by Iletora</span></footer>
+
+<!-- Item picker -->
+<div class="modal" id="picker" hidden>
+  <div class="modal-box">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title" id="pickTitle">Weapon</div>
+        <div class="modal-hint">Pick up to 3 items, then press Apply. First one is the main item, the rest are alternatives. Double-click an item to take it and close.</div>
+      </div>
+      <button class="icon close" id="pickClose" title="Close (Esc)">✕</button>
+    </div>
+    <div class="selection" id="pickSel"></div>
+    <div class="chips" id="pickGroups"></div>
+    <div class="grid" id="pickGrid"></div>
+    <div class="modal-foot">
+      <button class="ghost" id="pickClear">Clear slot</button>
+      <button class="primary" id="pickDone">Apply</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" hidden></div>
+
+<script src="items.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
